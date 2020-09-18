@@ -6,12 +6,12 @@
   "parameters": {
     "instance": [
       {
-        "id": "defaultColor",
-        "name": "Default color",
-        "description": "Set which color is the default color",
+        "id": "defaultIcon",
+        "name": "Default icon",
+        "description": "Set which icon is the default icon",
         "type": "Enum",
-        "options": [{"#0000FF": "blue"}, {"#FFFF00": "yellow"}, {"#FF0000": "red"}],
-        "labels": {"empty": "Choose a color"},
+        "options": [{"company": "company"}, {"facebook": "facebook"}, {"twitch": "twitch"},{"instagram": "instagram"}],
+        "labels": {"empty": "Choose an icon"},
         "required": true
       }
     ]
