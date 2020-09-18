@@ -2,6 +2,5 @@
   "id": "default-field-value",
   "name": "Default icons",
   "srcdoc": "extension.html",
-  "fieldTypes": ["Symbol"],
-  "srcdoc": "./index.html"
+  "fieldTypes": ["Symbol"]
 }
