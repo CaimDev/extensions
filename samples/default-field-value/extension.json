@@ -1,19 +1,7 @@
 {
   "id": "default-field-value",
-  "name": "Default value for a field",
+  "name": "Default icons",
   "srcdoc": "extension.html",
   "fieldTypes": ["Symbol"],
-  "parameters": {
-    "instance": [
-      {
-        "id": "defaultIcon",
-        "name": "Default icon",
-        "description": "Set which icon is the default icon",
-        "type": "Enum",
-        "options": [{"company": "company"}, {"facebook": "facebook"}, {"twitch": "twitch"},{"instagram": "instagram"}],
-        "labels": {"empty": "Choose an icon"},
-        "required": true
-      }
-    ]
-  }
+  "srcdoc": "./index.html"
 }
