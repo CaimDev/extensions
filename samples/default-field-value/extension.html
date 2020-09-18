@@ -1,75 +1,28 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="https://contentful.github.io/ui-extensions-sdk/cf-extension.css">
-  <script src="https://unpkg.com/contentful-ui-extensions-sdk@3"></script>
-</head>
-<body>
-  <div class="cf-form-field">
-    <input type="text" class="cf-form-input">
-    <div class="cf-form-hint">I am a UI Extension with a default value:
-      <span class="default-value"></span>
+<!doctype html>
+<html lang="en">
+  <head><!-- ... --></head>
+  <body>
+    <div id="content">
+      <select id="countrySelect" class="cf-form-input">
+        <option value="company">company</option>
+        <option value="facebook">facebook</option>
+        <option value="twitch">twitch</option>
+        <option value="instagram">instagram</option>
+      </select>
     </div>
-  </div>
-  <script>
-    'use strict';
-    window.contentfulExtension.init(function (extension) {
-
-      extension.window.startAutoResizer();
-
-      var inputEl = document.querySelector('.cf-form-input');
-      inputEl.value = extension.field.getValue() || '';
-
-      var detachValueChangeHandler = extension.field.onValueChanged(valueChangeHandler);
-
-      inputEl.addEventListener('input', keyboardInputHandler);
-      window.addEventListener('onbeforeunload', unloadHandler);
-
-      var defaultColor = extension.parameters.instance.defaultColor;
-      var defaultColorText = document.createTextNode(defaultColor || 'none');
-      document.querySelector('.default-value').appendChild(defaultColorText);
-
-      var isNewlyCreated = extension.entry.getSys().version < 2;
-      var hasNoValue = typeof extension.field.getValue() === 'undefined';
-
-      if (isNewlyCreated && hasNoValue) {
-        extension.field.setValue(defaultColor || '');
-      }
-
-      function valueChangeHandler(value) {
-        value = value || '';
-
-        if (value !== inputEl.value) {
-          inputEl.value = value;
-        }
-
-        if (/^#([a-f0-9]{3}){1,2}$/i.test(value)) {
-          extension.field.setInvalid(false);
-          document.querySelector(".cf-form-field").style.borderLeft = "5px solid " + value;
-        } else {
-          extension.field.setInvalid(true);
-          document.querySelector(".cf-form-field").style.borderLeft = "0";
-        }
-      }
-
-      function keyboardInputHandler() {
-        var value = inputEl.value;
-
-        if (typeof value === 'string' && value.length > 0) {
-          extension.field.setValue(value);
-        } else {
-          extension.field.removeValue();
-          inputEl.value = '';
-        }
-      }
-
-      function unloadHandler() {
-        window.removeEventListener('onbeforeunload', unloadHandler);
-        inputEl.removeEventListener('input', keyboardInputHandler);
-        detachValueChangeHandler();
-      }
-    });
-  </script>
-</body>
+    <script type="text/javascript">
+      // initialize the contentful extension
+      // using the UI extensions SDK
+      window.contentfulExtension.init( extension => {
+        const select = document.getElementById('countrySelect');
+        const value = extension.field.getValue();
+        select.value = value;
+        
+        // send changes to the Contentful web app
+        select.addEventListener( 'change', event => {
+          extension.field.setValue( event.target.value );
+        } );
+      } );
+    </script>
+  </body>
 </html>
